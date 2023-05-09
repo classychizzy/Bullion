@@ -9,4 +9,8 @@ router.post('/login', auth.login);
 // Logout
 router.post('/logout', auth.logout);
 
+// Refresh Token
+router.get('/refresh', auth.refreshToken);
+
+
 export const AuthRouter: Router = router;
