@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 class Employees {
-    public async login(req: Request, res: Response) {}
+    public async allEmployees(req: Request, res: Response) {}
 }
 
 
