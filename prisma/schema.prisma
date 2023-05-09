@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Employees {
+  Id          Int           @id @default(autoincrement())
+  name        String?       @db.VarChar(255)
+  level       Int?
+  jobTitle    String?       @db.VarChar(50)
+  department  String?       @db.VarChar(255)
+  EmployeeId  String?       @db.VarChar(255)
+  LevelSalary LevelSalary[]
+}
+
+model LevelSalary {
+  Id          Int       @id @default(autoincrement())
+  level       Int
+  Salary      Int
+  Employees   Employees @relation(fields: [employeesId], references: [Id])
+  employeesId Int
+}
