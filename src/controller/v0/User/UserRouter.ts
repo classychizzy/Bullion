@@ -5,7 +5,7 @@ import auth from '../Authentication/AuthController';
 const router: Router = Router();
 
 // create a user
-router.post('/', auth.auth, userController.create);
+router.post('/new', auth.auth, userController.newUser);
 
 // fetch user details
 router.get('/:userID', auth.auth, userController.fetchUser);
@@ -17,6 +17,6 @@ router.put('/:userID', auth.auth, userController.updateUser);
 router.delete('/:userID', auth.auth, userController.deleteUser);
 
 // get all (users
-router.get('/', auth.auth, userController.getAll);
+router.get('/all', auth.auth, userController.getAll);
 
 export const UserRouter: Router = router;

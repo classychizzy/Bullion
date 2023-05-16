@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import * as jwt from 'jsonwebtoken';
 import * as EmailValidator from 'email-validator';
 import { config } from "../config";
-import redisClient from "../../../utils/redis.server";
+import redisClient from "../../../utils/redisServer";
 
 
 class Auth {
@@ -39,14 +39,13 @@ class Auth {
             const userData = {
                 'id': user.id,
                 'email': user.email,
-                'username': user.username,
-                'roleID': user.roleID
+                'username': user.username
             }
 
             // Send token as cookie
-            const accessToken = jwt.sign(userData, config.jwt.accessKey, { algorithm: 'HS256', expiresIn: '50s'});
+            const accessToken = jwt.sign(userData, config.jwt.accessKey, { algorithm: 'HS256', expiresIn: '500s'});
             const refreshToken = jwt.sign(userData, config.jwt.refreshKey, { algorithm: 'HS256', expiresIn: '1d'});
-            await redisClient.set(refreshToken, user.username, 60 * 60 * 24);
+            await redisClient.set(refreshToken, user.username, 'EX', 60 * 60 * 24);
             res
             .cookie('accessToken', accessToken, {
                 httpOnly: true,

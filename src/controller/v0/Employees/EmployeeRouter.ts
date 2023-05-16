@@ -8,9 +8,16 @@ const router: Router = Router();
 router.get('/all', auth.auth, employees.allEmployees);
 
 // Post new employee
+router.post('/new', auth.auth, employees.newEmployee);
+
 // Get employee by ID
+router.get('/:employeeID', auth.auth, employees.getEmployee);
+
 // Put (update) employee data
+router.put('/:employeeID', auth.auth, employees.updateEmployee);
+
 // Delete employee
+router.delete('/:employeeID', auth.auth, employees.deleteEmployee)
 
 
 export const EmployeeRouter: Router = router;
